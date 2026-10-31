@@ -19,7 +19,7 @@ import useThemeStyles from '@hooks/useThemeStyles';
 
 import {getExpenseDefaultRuleCount} from '@libs/ExpenseDefaultRuleUtils';
 import {readFileAsync} from '@libs/fileDownload/FileUtils';
-import {createFilteredMemberCountSelector, createInvoiceConfigurationTextSelector, getDistanceRateCustomUnit, getPerDiemCustomUnit, isCollectPolicy} from '@libs/PolicyUtils';
+import {createFilteredMemberCountSelector, createInvoiceConfigurationTextSelector, getDistanceRateCustomUnit, getPerDiemCustomUnit, isCollectPolicy, arePolicyRulesEnabled} from '@libs/PolicyUtils';
 import {formatAddressToString} from '@libs/ReportActionsUtils';
 import {getReportFieldsByPolicyID} from '@libs/ReportUtils';
 
@@ -149,7 +149,7 @@ function WorkspaceDuplicateSelectFeaturesForm({policyID}: WorkspaceDuplicateForm
                       alternateText: workflows?.join(', '),
                   }
                 : undefined,
-            rules && rules.length > 0 && !isCollect
+            rules && rules.length > 0 && !isCollect && arePolicyRulesEnabled(policy, policyCategories)
                 ? {
                       translation: translate('workspace.common.rules'),
                       value: 'rules',
@@ -158,7 +158,7 @@ function WorkspaceDuplicateSelectFeaturesForm({policyID}: WorkspaceDuplicateForm
                           : undefined,
                   }
                 : undefined,
-            codingRulesCount > 0 && !isCollect
+            codingRulesCount > 0 && !isCollect && arePolicyRulesEnabled(policy, policyCategories)
                 ? {
                       translation: translate('workspace.duplicateWorkspace.merchantRules'),
                       value: 'codingRules',

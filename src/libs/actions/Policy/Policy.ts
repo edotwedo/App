@@ -3769,7 +3769,9 @@ function buildDuplicatePolicyData(policy: Policy, options: DuplicatePolicyDataOp
                     areReportFieldsEnabled: null,
                     areInvoiceFieldsEnabled: null,
                     rulesDocumentURL: null,
+                    areRulesEnabled: null,
                 },
+                areRulesEnabled: isRulesFeatureSelected,
             },
         },
         {
